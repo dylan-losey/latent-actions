@@ -4,3 +4,4 @@
 * teleop_cae.py lets the user control the robot with the latent space
 
 The current task is moving the end-effector of the Panda robot in a plane.
+We use robosuite to create and control the simulated Panda robot.
