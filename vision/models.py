@@ -44,7 +44,7 @@ class CAE(nn.Module):
         self.enc_fc2 = nn.Linear(30,30)
         self.enc_fc3 = nn.Linear(30,1)
 
-        self.dec_fc1 = nn.Linear(13,30)
+        self.dec_fc1 = nn.Linear(14,30)
         self.dec_fc2 = nn.Linear(30,30)
         self.dec_fc3 = nn.Linear(30,7)
 
@@ -68,16 +68,14 @@ class CAE(nn.Module):
 
     def decoder(self, context):
         img = self.image(context[0])
-        # x = torch.cat((img, context[1], context[2]), 1)
-        x = torch.cat((img, context[1]), 1)
+        x = torch.cat((img, context[1], context[2]), 1)
         h1 = torch.tanh(self.dec_fc1(x))
         h2 = torch.tanh(self.dec_fc2(h1))
         return self.dec_fc3(h2)
 
     def forward(self, x):
-        # z = self.encoder(x)
-        # context = (x[0], x[1], z)
-        context = (x[0], x[1])
+        z = self.encoder(x)
+        context = (x[0], x[1], z)
         a = self.decoder(context)
         loss = self.loss(a, x[2])
         return loss

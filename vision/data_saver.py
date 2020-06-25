@@ -11,13 +11,18 @@ def main():
     folder = 'demonstrations/'
     savename = 'data/traj_dataset.pkl'
 
+    # for every demonstration
     for filename in os.listdir(folder):
         traj = pickle.load(open(folder + filename, "rb"))
         n_states = len(traj)
         print(filename, n_states)
 
+        # get the goal image & robot state at goal
         goal = traj[-1]
         goal_s = goal[1]
+
+        # for every state along path
+        # get image and action to goal
         for idx in range(n_states):
             curr_item = traj[idx]
             image = curr_item[0] / 128.0 - 1.0

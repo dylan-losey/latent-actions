@@ -24,7 +24,7 @@ def main():
         ignore_done=True,
         camera_height=height,
         camera_width=width,
-        gripper_visualization=True,
+        gripper_visualization=False,
         use_camera_obs=True,
         use_object_obs=False,
     )
